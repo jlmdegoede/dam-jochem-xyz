@@ -1,8 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\DigitalAssetController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +17,19 @@ use App\Http\Controllers\DigitalAssetController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', [DigitalAssetController::class, 'index'])->name('digitalAssets.index');
+    Route::get('/digital-assets/create', [DigitalAssetController::class, 'create'])->name('digitalAssets.create');
+    Route::post('/digital-assets/create', [DigitalAssetController::class, 'store'])->name('digitalAssets.store');
+
+    Route::get('/digital-assets/{id}', [DigitalAssetController::class, 'view'])->name('digitalAssets.view');
+
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+    Route::post('/categories/create', [CategoryController::class, 'store'])->name('categories.store');
+    // Add more routes that require authentication here
 });
 
-Route::get('/digital-assets/create', [DigitalAssetController::class, 'create'])->name('digitalAssets.create');
-Route::post('/digital-assets', [DigitalAssetController::class, 'store'])->name('digitalAssets.store');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

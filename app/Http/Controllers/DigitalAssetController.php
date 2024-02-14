@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\DigitalAsset;
 use App\Models\Category;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 
 class DigitalAssetController extends Controller
 {
+    use AuthorizesRequests, ValidatesRequests;
+
     public function index()
     {
         $digitalAssets = DigitalAsset::paginate(10); // Adjust the number per page as needed
@@ -18,6 +22,14 @@ class DigitalAssetController extends Controller
         $categories = Category::all(); // Assuming you want to list categories in your form.
         return view('digitalAssets.create', compact('categories'));
     }
+
+    public function view($id)
+    {
+        $digitalAsset = DigitalAsset::findOrFail($id);
+
+        return view('digitalAssets.view', compact('digitalAsset'));
+    }
+
 
     /**
      * Store a newly created digital asset in storage.

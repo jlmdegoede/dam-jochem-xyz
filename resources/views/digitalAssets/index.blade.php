@@ -6,6 +6,7 @@
     <div class="row">
         @foreach ($digitalAssets as $asset)
         <div class="col-md-4 mb-4">
+            <a href="{{ route('digitalAssets.view', $asset->id) }}">
             <div class="card">
                 <img src="{{ Storage::url($asset->filename) }}" class="card-img-top" alt="{{ $asset->alt_text }}">
                 <div class="card-body">
@@ -14,6 +15,7 @@
                     <!-- Add more details you want to show -->
                 </div>
             </div>
+            </a>
         </div>
         @endforeach
     </div>

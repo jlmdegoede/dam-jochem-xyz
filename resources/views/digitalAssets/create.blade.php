@@ -10,6 +10,16 @@
     </div>
     @endif
 
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <form action="{{ route('digitalAssets.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
@@ -17,8 +27,20 @@
             <input type="text" class="form-control" id="title" name="title" required>
         </div>
         <div class="mb-3">
+            <label for="caption" class="form-label">Caption</label>
+            <input type="text" class="form-control" id="caption" name="caption" required>
+        </div>
+        <div class="mb-3">
+            <label for="alt_text" class="form-label">Alt text</label>
+            <input type="text" class="form-control" id="alt_text" name="alt_text" required>
+        </div>
+        <div class="mb-3">
             <label for="filename" class="form-label">File</label>
             <input type="file" class="form-control" id="filename" name="filename" required>
+        </div>
+        <div class="mb-3">
+            <label for="title" class="form-label">Language</label>
+            <input type="text" class="form-control" id="language" name="language" value="nl" required>
         </div>
         <div class="mb-3">
             <label for="category_id" class="form-label">Category</label>
