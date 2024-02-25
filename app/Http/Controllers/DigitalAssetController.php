@@ -51,7 +51,6 @@ class DigitalAssetController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'caption' => 'required',
             'alt_text' => 'required',
             'category_id' => 'required|exists:categories,id',
         ]);
@@ -78,7 +77,6 @@ class DigitalAssetController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'caption' => 'required',
             'alt_text' => 'required',
             'filename' => 'required|file',
             'category_id' => 'required|exists:categories,id',
@@ -87,9 +85,11 @@ class DigitalAssetController extends Controller
         // Handle the file upload
         if ($request->hasFile('filename')) {
 
+            print($request->category_id);
+
             $file = $request->file('filename');
             $filename = $this->filenameService->generateUniqueFilename($file);
-            $savedFile = $file->storeAs('public/digitalAssets', $filename);
+            $savedFile = $file->storeAs('public', $filename);
 
             $digitalAsset = new DigitalAsset([
                 'title' => $request->title,
@@ -101,7 +101,7 @@ class DigitalAssetController extends Controller
             ]);
 
             $digitalAsset->save();
-            return redirect()->route('digitalAssets.create')->with('success', 'Digital Asset created successfully.');
+            return redirect()->route('digitalAssets.view', $digitalAsset->id)->with('success', 'Digital Asset created successfully.');
         }
 
         return back()->withInput()->withErrors(['filename' => 'File upload failed.']);

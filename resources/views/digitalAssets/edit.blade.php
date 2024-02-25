@@ -28,7 +28,7 @@
         </div>
         <div class="mb-3">
             <label for="caption" class="form-label">Caption</label>
-            <input type="text" class="form-control" id="caption"  value="{{ $asset->caption }}" name="caption" required>
+            <input type="text" class="form-control" id="caption"  value="{{ $asset->caption }}" name="caption">
         </div>
         <div class="mb-3">
             <label for="alt_text" class="form-label">Alt text</label>
@@ -37,7 +37,7 @@
         <div class="mb-3">
             <p>Current File: {{ $asset->filename }}</p>
             <label for="filename" class="form-label">File</label>
-            <input type="file" class="form-control" id="filename"  value="{{ $asset->filename }}" name="filename" required>
+            <input type="file" class="form-control" id="filename"  value="{{ $asset->filename }}" name="filename">
         </div>
         <div class="mb-3">
             <label for="title" class="form-label">Language</label>

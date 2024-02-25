@@ -20,6 +20,7 @@ class DigitalAsset extends Model
         'caption',
         'alt_text',
         'language',
+        'category_id'
     ];
 
     /**

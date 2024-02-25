@@ -28,7 +28,7 @@
         </div>
         <div class="mb-3">
             <label for="caption" class="form-label">Caption</label>
-            <input type="text" class="form-control" id="caption" name="caption" required>
+            <input type="text" class="form-control" id="caption" name="caption">
         </div>
         <div class="mb-3">
             <label for="alt_text" class="form-label">Alt text</label>
