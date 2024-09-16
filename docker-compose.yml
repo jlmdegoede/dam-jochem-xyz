@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+    web:
+        image: dam-jochem-xyz:latest
+        build:
+            target: web
+            context: .
+        env_file:
+            - .env
+        ports:
+            - "8000:80"
+        volumes:
+            - ./database:/var/www/html/database
+            - ./storage/app/public:/var/www/html/storage/app/public
