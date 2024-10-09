@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<div class="card">
+    <img src="/media/{{ asset.asset }}" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">{{ asset.title }}</h5>
+
+        <table class="table">
+            <tr>
+                <td>Description</td>
+                <td>{{ asset.description }}</td>
+            </tr>
+            <tr>
+                <td>Alt text</td>
+                <td>{{ asset.alt_text }}</td>
+            </tr>
+            <tr>
+                <td>Img tag</td>
+                <td>
+                    <code>
+                        &ltimg src="https://assets.techword.nl/media/{{ asset.asset }}" alt="{{ asset.alt_text }}" width="{{ asset.width }}" height="{{ asset.height }}" />
+                    </code>
+                </td>
+            </tr>
+            <tr>
+                <td>Markdown</td>
+                <td>
+                    <code>
+                        ![{{ asset.description }}](https://assets.techword.nl/media/{{ asset.asset }})
+                    </code>
+                </td>
+            </tr>
+        </table>
+
+        <a href="#" class="btn btn-primary">Edit Attributes</a>
+
+        <a href="{% url 'assets_describe' asset_id=asset.pk %}" class="btn btn-secondary">Describe Image</a>
+
+        <a href="{% url 'assets_describe' asset_id=asset.pk %}" class="btn btn-danger">Delete Asset</a>
+    </div>
+</div>
+{% endblock %}

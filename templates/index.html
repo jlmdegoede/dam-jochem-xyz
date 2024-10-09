@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+    <h3>Assets</h3>
+
+    <a href="/assets/create" class="btn btn-primary">Create new asset</a>
+
+    <div class="row row-cols-1 row-cols-md-3 mt-3">
+    {% for asset in assets %}
+
+        <div class="col mt-1">
+            <div class="card" >
+                <img src="/media/{{ asset.asset }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ asset.title }}</h5>
+                    <a href="{% url 'assets_view' asset_id=asset.id %}" class="btn btn-primary">View</a>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,4 @@
+django
+django-bootstrap5==24.3
+ollama==0.3.3
+Pillow==10.4.0

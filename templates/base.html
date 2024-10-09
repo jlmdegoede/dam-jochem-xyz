@@ -1,0 +1,22 @@
+{% load django_bootstrap5 %}
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>DAMxyz</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+
+<body>
+
+{% include "header.html" %}
+
+<div class="container mt-3">
+{% block content %}
+
+{% endblock %}
+</div>
+
+</body>
+</html>
