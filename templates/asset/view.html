@@ -28,7 +28,7 @@
                 <td>Markdown</td>
                 <td>
                     <code>
-                        ![{{ asset.description }}](https://assets.techword.nl/media/{{ asset.asset }})
+                        ![{{ asset.title }}](https://assets.techword.nl/media/{{ asset.asset }})
                     </code>
                 </td>
             </tr>
@@ -36,9 +36,15 @@
 
         <a href="#" class="btn btn-primary">Edit Attributes</a>
 
-        <a href="{% url 'assets_describe' asset_id=asset.pk %}" class="btn btn-secondary">Describe Image</a>
+        <form method="POST" class="mt-1"  action="{% url 'assets_describe' asset_id=asset.pk %}">
+            {% csrf_token %}
+            <button class="btn btn-secondary">Describe Image</button>
+        </form>
 
-        <a href="{% url 'assets_describe' asset_id=asset.pk %}" class="btn btn-danger">Delete Asset</a>
+        <form method="POST" class="mt-1" action="{% url 'assets_delete' asset_id=asset.pk %}">
+            {% csrf_token %}
+            <button class="btn btn-danger">Delete Asset</button>
+        </form>
     </div>
 </div>
 {% endblock %}

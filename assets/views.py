@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from assets.ai import describe_image
 from assets.forms import AssetForm
@@ -31,9 +32,11 @@ def generate_ai_attributes(request, asset_id):
 
 @login_required
 def delete(request, asset_id):
-    if request.method == "DELETE":
+    if request.method == "POST":
         asset = Asset.objects.get(pk=asset_id)
         asset.delete()
+        messages.success(request, 'Asset deleted successfully')
+
         return redirect('assets_list')
 
 
@@ -50,6 +53,7 @@ def create(request):
             result = form.save(commit=False)
             result.width = width
             result.height = height
+            result.save()
 
             return redirect('assets_list')
     else:
