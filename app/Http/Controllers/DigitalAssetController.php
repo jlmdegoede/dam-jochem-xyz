@@ -22,10 +22,16 @@ class DigitalAssetController extends Controller
         $this->filenameService = $filenameService;
     }
 
-    public function index(): Renderable
+    public function index(Request $request): Renderable
     {
-        $digitalAssets = DigitalAsset::paginate(10);
-        return view('digitalAssets.index', compact('digitalAssets'));
+        $selectedCategory = $request->input('category');
+
+        $categories = Category::all();
+
+        $digitalAssets = DigitalAsset::when($selectedCategory, function($query, $selectedCategory) {
+            return $query->where('category_id', $selectedCategory);
+        })->paginate(10);
+        return view('digitalAssets.index', compact('digitalAssets', 'categories', 'selectedCategory'));
     }
 
     public function create() : Renderable

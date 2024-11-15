@@ -14,6 +14,7 @@
                 <p class="card-text">
                     {{ $digitalAsset->caption }} <br/>
                     Category: {{ $digitalAsset->category->title }} <br/>
+                    Language: {{ $digitalAsset->language }} <br/>
 
                     URL to embed: https://assets.techword.nl/{{ $digitalAsset->filename }}
                 </p>
